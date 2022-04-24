@@ -93,7 +93,7 @@ public class Player extends Creature {
 		
 		
 		//Attack
-		checkAttacks();
+//		checkAttacks();
 		
 		
 		//Inventory
@@ -207,11 +207,11 @@ public class Player extends Creature {
 //		bounds.width, bounds.height);
 		
 		//Display Attack Hitbox
-		if(!(attackHitbox == null)) {
-			g.drawRect((int) (attackHitbox.x - handler.getGameCamera().getxOffset()), (int) (attackHitbox.y - handler.getGameCamera().getyOffset()), 
-					attackHitbox.width, attackHitbox.height);
-			
-		}
+//		if(!(attackHitbox == null)) {
+//			g.drawRect((int) (attackHitbox.x - handler.getGameCamera().getxOffset()), (int) (attackHitbox.y - handler.getGameCamera().getyOffset()), 
+//					attackHitbox.width, attackHitbox.height);
+//			
+//		}
 		
 	}
 	
