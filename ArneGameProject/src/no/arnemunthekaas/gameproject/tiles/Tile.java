@@ -3,29 +3,24 @@ package no.arnemunthekaas.gameproject.tiles;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import no.arnemunthekaas.gameproject.tiles.cliffs.CliffEastTile;
-import no.arnemunthekaas.gameproject.tiles.cliffs.CliffNorthEastTile;
-import no.arnemunthekaas.gameproject.tiles.cliffs.CliffNorthEastTileAlt;
-import no.arnemunthekaas.gameproject.tiles.cliffs.CliffNorthTile;
-import no.arnemunthekaas.gameproject.tiles.cliffs.CliffNorthWestTile;
-import no.arnemunthekaas.gameproject.tiles.cliffs.CliffNorthWestTileAlt;
-import no.arnemunthekaas.gameproject.tiles.cliffs.CliffWestTile;
-import no.arnemunthekaas.gameproject.tiles.cliffs.RockFaceTile;
+import no.arnemunthekaas.gameproject.tiles.worldgen.*;
 
 public class Tile {
 	
 	//STATIC STUFF HERE
 	
-	public static Tile[] tiles = new Tile[256];
-	public static Tile grassTile = new GrassTile(0);
-	public static Tile stoneTile = new RockFaceTile(1);
-	public static Tile cliffNorth = new CliffNorthTile(2);
-	public static Tile cliffWest = new CliffWestTile(3);
-	public static Tile cliffNorthWest = new CliffNorthWestTile(4);
-	public static Tile cliffNorthWestAlt = new CliffNorthWestTileAlt(5);
-	public static Tile cliffNorthEastAlt = new CliffNorthEastTileAlt(6);
-	public static Tile cliffNorthEast = new CliffNorthEastTile(7);
-	public static Tile cliffEast = new CliffEastTile(8);
+	public static Tile[] tiles = new Tile[11];
+	public static Tile DeepOcean0 = new DeepOcean0(0);
+	public static Tile Ocean1 = new Ocean1(1);
+	public static Tile Coast2 = new Coast2(2);
+	public static Tile Beach3 = new Beach3(3);
+	public static Tile LightGrass4 = new LightGrass4(4);
+	public static Tile DefaultGrass5 = new DefaultGrass5(5);
+	public static Tile DarkGrass6 = new DarkGrass6(6);
+	public static Tile DarkerGrass7 = new DarkerGrass7(7);
+	public static Tile DarkestGrass8 = new DarkestGrass8(8);
+	public static Tile LightRock9 = new LightRock9(9);
+	public static Tile Rock10 = new Rock10(10);
 	
 	//CLASS
 	public static final int TILEWIDTH = 64, TILEHEIGHT = 64;

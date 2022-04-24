@@ -1,12 +1,12 @@
-package no.arnemunthekaas.gameproject.tiles.cliffs;
+package no.arnemunthekaas.gameproject.tiles.worldgen;
 
 import no.arnemunthekaas.gameproject.gfx.Assets;
 import no.arnemunthekaas.gameproject.tiles.Tile;
 
-public class CliffEastTile extends Tile {
-
-	public CliffEastTile(int id) {
-		super(Assets.cliffEast, id);
+public class DeepOcean0 extends Tile {
+	
+	public DeepOcean0(int id) {
+		super(Assets.deepOcean, id);
 
 	}
 	

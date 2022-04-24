@@ -4,12 +4,11 @@ import java.awt.Font;
 import java.awt.image.BufferedImage;
 
 public class Assets {
-	
-		private static final int width = 96, height = 104;
 		
-		//Terrain sprites
-		public static BufferedImage grass, cliffNorth, cliffWest, cliffSouth, cliffEast, cliffNorthWest, 
-		rockFace, cliffNorthWestAlt, cliffNorthEastAlt, cliffNorthEast, attack; //All terrain sprites
+		//Worldgen sprites
+		public static BufferedImage deepOcean, ocean, coast, beach, lightGrass, defaultGrass, darkGrass,
+		darkerGrass, darkestGrass, lightRock, rock;
+		public static final int terrainWidth = 16, terrainHeight = 16;
 		
 		//Items
 		public static BufferedImage log; 
@@ -43,7 +42,8 @@ public class Assets {
 			
 			// Sprite sheets
 			
-			SpriteSheet TerrainSheet = new SpriteSheet(ImageLoader.loadImage("/images/spritesheets/terrainSprites.png"));
+			SpriteSheet worldGenSheet = new SpriteSheet(ImageLoader.loadImage("/images/spritesheets/terrain.png"));
+			
 			SpriteSheet TeddySheet = new SpriteSheet(ImageLoader.loadImage("/images/spritesheets/teddySprites.png"));
 			SpriteSheet AttacksSheet = new SpriteSheet(ImageLoader.loadImage("/images/spritesheets/attacksSprites.png"));
 			
@@ -61,11 +61,6 @@ public class Assets {
 			
 			player_down = new BufferedImage[4];
 			
-//			player_down[0] = WizardSheet.crop(0, 0, 16, 32);
-//			player_down[1] = WizardSheet.crop(0, 32, 16, 32);
-//			player_down[2] = WizardSheet.crop(0, 64, 16, 32);
-//			player_down[3] = WizardSheet.crop(0, 96, 16, 32);
-			
 			player_down[0] = TeddySheet.crop(0, 0, 32, 32);
 			player_down[1] = TeddySheet.crop(0, 32, 32, 32);
 			player_down[2] = TeddySheet.crop(0, 64, 32, 32);
@@ -73,12 +68,7 @@ public class Assets {
 			
 			
 			player_up = new BufferedImage[4];
-			
-//			player_up[0] = WizardSheet.crop(48, 0, 16, 32);
-//			player_up[1] = WizardSheet.crop(48, 32, 16, 32);
-//			player_up[2] = WizardSheet.crop(48, 64, 16, 32);
-//			player_up[3] = WizardSheet.crop(48, 96, 16, 32);
-			
+
 			player_up[0] = TeddySheet.crop(32, 0, 32, 32);
 			player_up[1] = TeddySheet.crop(32, 32, 32, 32);
 			player_up[2] = TeddySheet.crop(32, 64, 32, 32);
@@ -86,11 +76,6 @@ public class Assets {
 			
 			
 			player_left = new BufferedImage[4];
-			
-//			player_left[0] = WizardSheet.crop(32, 0, 16, 32);
-//			player_left[1] = WizardSheet.crop(32, 32, 16, 32);
-//			player_left[2] = WizardSheet.crop(32, 64, 16, 32);
-//			player_left[3] = WizardSheet.crop(32, 96, 16, 32);
 			
 			player_left[0] = TeddySheet.crop(0, 0, 32, 32);
 			player_left[1] = TeddySheet.crop(0, 32, 32, 32);
@@ -100,12 +85,7 @@ public class Assets {
 			
 			
 			player_right = new BufferedImage[4];
-			
-//			player_right[0] = WizardSheet.crop(16, 0, 16, 32);
-//			player_right[1] = WizardSheet.crop(16, 32, 16, 32);
-//			player_right[2] = WizardSheet.crop(16, 64, 16, 32);
-//			player_right[3] = WizardSheet.crop(16, 96, 16, 32);
-			
+				
 			player_right[0] = TeddySheet.crop(32, 0, 32, 32);
 			player_right[1] = TeddySheet.crop(32, 32, 32, 32);
 			player_right[2] = TeddySheet.crop(32, 64, 32, 32);
@@ -113,35 +93,34 @@ public class Assets {
 		
 			
 			player_still = new BufferedImage[2];
-//			
-//			player_still[0] = WizardSheet.crop(0, 0, 16, 32);
-//			player_still[1] = WizardSheet.crop(0, 32, 16, 32);
-//		
+
 			player_still[0] = TeddySheet.crop(0, 0, 32, 32);
 			player_still[1] = TeddySheet.crop(0, 64, 32, 32);
 			
-			//Terrain
+			//Worldgen
+			deepOcean = worldGenSheet.crop(0, 0, terrainWidth, terrainHeight);
+			ocean = worldGenSheet.crop(terrainWidth, 0, terrainWidth, terrainHeight);
+			coast = worldGenSheet.crop(terrainWidth*2, 0, terrainWidth, terrainHeight);
+			beach = worldGenSheet.crop(terrainWidth*3, 0, terrainWidth, terrainHeight);
 			
-			grass = TerrainSheet.crop(0, 0, 16, 16);
-			cliffNorth = TerrainSheet.crop(0, 16, 16, 16);
-			cliffWest = TerrainSheet.crop(0, 32, 16, 16);
-			cliffSouth = TerrainSheet.crop(0, 48, 16, 16);
-			cliffEast= TerrainSheet.crop(0, 0, 64, 16);
-			rockFace = TerrainSheet.crop(0, 80, 16, 16);
-			cliffNorthWest = TerrainSheet.crop(0, 96, 16, 16);
-			cliffNorthWestAlt = TerrainSheet.crop(0, 112, 16, 16);
-			cliffNorthEastAlt = TerrainSheet.crop(16, 112, 16, 16);
-			cliffNorthEast = TerrainSheet.crop(16, 96, 16, 16);
-			cliffEast = TerrainSheet.crop(0, 64, 16, 16);
+			lightGrass = worldGenSheet.crop(0, terrainHeight, terrainWidth, terrainHeight);
+			defaultGrass = worldGenSheet.crop(terrainWidth, terrainHeight, terrainWidth, terrainHeight);
+			darkGrass = worldGenSheet.crop(terrainWidth*2, terrainHeight, terrainWidth, terrainHeight);
+			darkerGrass = worldGenSheet.crop(terrainWidth*3, terrainHeight, terrainWidth, terrainHeight);
+			
+			darkestGrass = worldGenSheet.crop(0, terrainHeight*2, terrainWidth, terrainHeight);
+			lightRock = worldGenSheet.crop(terrainWidth, terrainHeight*2, terrainWidth, terrainHeight);
+			rock = worldGenSheet.crop(terrainWidth*2, terrainHeight*2, terrainWidth, terrainHeight);
+			
 			
 			//Items
 			
-			log = TerrainSheet.crop(32, 0, 16, 16);
-			
-			//Static Entities
-			pine1 = TerrainSheet.crop(16, 0, 16, 32);
-			pine2 = TerrainSheet.crop(16, 32, 16, 32);
-			tallGrass = TerrainSheet.crop(16, 64, 16, 16);
+//			log = TerrainSheet.crop(32, 0, 16, 16);
+//			
+//			//Static Entities
+//			pine1 = TerrainSheet.crop(16, 0, 16, 32);
+//			pine2 = TerrainSheet.crop(16, 32, 16, 32);
+//			tallGrass = TerrainSheet.crop(16, 64, 16, 16);
 			
 			//Enemies
 			

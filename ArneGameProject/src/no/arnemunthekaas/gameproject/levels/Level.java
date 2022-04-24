@@ -44,10 +44,16 @@ public class Level {
 //		entityManager.addEntity(new TallGrass(handler, 650, 600));
 //		entityManager.addEntity(new SlimeEnemy(handler, 400, 800, Tile.TILEWIDTH, Tile.TILEHEIGHT));		
 		
-		// loadLevel(path);
+		loadLevel(path);
+		// generate();
 		
 		entityManager.getPlayer().setX(spawnX*width);
 		entityManager.getPlayer().setY(spawnY*height);
+	}
+
+	private void generate() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	public void tick() {
@@ -81,12 +87,12 @@ public class Level {
 	
 	public Tile getTile(int x, int y) {
 		if(x < 0 || y < 0 || x >= width || y >= height) {
-			return Tile.grassTile;
+			return Tile.DefaultGrass5;
 		}
 		
 		Tile t = Tile.tiles[tiles[x][y]];
 		if(t == null) {
-			return Tile.grassTile;
+			return Tile.DefaultGrass5;
 		}
 		
 		return t;
