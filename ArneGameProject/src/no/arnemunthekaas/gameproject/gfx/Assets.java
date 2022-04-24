@@ -28,6 +28,8 @@ public class Assets {
 		public static BufferedImage biteAttack;
 		
 		// UI Elements
+		public static final int STARTBUTTONWIDTH = 128;
+		public static final int STARTBUTTONHEIGHT = 64;
 		public static BufferedImage[] button_start;
 		public static BufferedImage inventoryScreen;
 		
@@ -41,20 +43,19 @@ public class Assets {
 			
 			// Sprite sheets
 			
-			SpriteSheet TerrainSheet = new SpriteSheet(ImageLoader.loadImage("/textures/terrainSprites.png"));
-			SpriteSheet MainMenu = new SpriteSheet(ImageLoader.loadImage("/textures/start.png"));
-			SpriteSheet WizardSheet = new SpriteSheet(ImageLoader.loadImage("/textures/redWizardSprites.png"));
-			SpriteSheet TeddySheet = new SpriteSheet(ImageLoader.loadImage("/textures/teddySprites.png"));
-			SpriteSheet AttacksSheet = new SpriteSheet(ImageLoader.loadImage("/textures/attacksSprites.png"));
+			SpriteSheet TerrainSheet = new SpriteSheet(ImageLoader.loadImage("/images/spritesheets/terrainSprites.png"));
+			SpriteSheet TeddySheet = new SpriteSheet(ImageLoader.loadImage("/images/spritesheets/teddySprites.png"));
+			SpriteSheet AttacksSheet = new SpriteSheet(ImageLoader.loadImage("/images/spritesheets/attacksSprites.png"));
 			
 			// UI
 			
-			inventoryScreen = ImageLoader.loadImage("/textures/inventoryScreen.png");
+			inventoryScreen = ImageLoader.loadImage("/images/inventoryScreen.png");
+			SpriteSheet PlayButton = new SpriteSheet(ImageLoader.loadImage("/images/playbutton.png"));
 			
 			button_start = new BufferedImage[2];
 			
-			button_start[0] = MainMenu.crop(0, 0, 387, 182);
-			button_start[1] = MainMenu.crop(0, 182, 387, 182);
+			button_start[0] = PlayButton.crop(0, 0, STARTBUTTONWIDTH, STARTBUTTONHEIGHT);
+			button_start[1] = PlayButton.crop(0, STARTBUTTONHEIGHT, STARTBUTTONWIDTH, STARTBUTTONHEIGHT);
 			
 			// Player Animations
 			
@@ -144,9 +145,9 @@ public class Assets {
 			
 			//Enemies
 			
-			SpriteSheet slimeSprite = new SpriteSheet(ImageLoader.loadImage("/textures/slimeEnemy.png"));
+			// SpriteSheet slimeSprite = new SpriteSheet(ImageLoader.loadImage("/textures/slimeEnemy.png"));
 			
-			slime = slimeSprite.crop(0,0,32,32);
+			// slime = slimeSprite.crop(0,0,32,32);
 			
 			//Attacks
 			

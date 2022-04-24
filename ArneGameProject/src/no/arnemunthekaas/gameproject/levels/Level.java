@@ -23,9 +23,9 @@ public class Level {
 	//Items
 	private ItemManager itemManager;
 	
-	private static final int WIDTH = 512;
-	private static final int HEIGHT = 512;
-	private static final double FEATURE_SIZE = 24;
+//	private static final int WIDTH = 512;
+//	private static final int HEIGHT = 512;
+//	private static final double FEATURE_SIZE = 24;
 	
 	public Level(Handler handler, String path) {
 		this.handler = handler;
@@ -33,20 +33,18 @@ public class Level {
 		itemManager = new ItemManager(handler);
 		
 		//Temp entities
-		entityManager.addEntity(new Tree(handler, 100, 250));
-		entityManager.addEntity(new Tree(handler, 250, 250));
-		entityManager.addEntity(new Tree(handler, 250, 800));
-		entityManager.addEntity(new TallGrass(handler, 550, 550));
-		entityManager.addEntity(new TallGrass(handler, 600, 550));
-		entityManager.addEntity(new TallGrass(handler, 650, 550));
-		entityManager.addEntity(new TallGrass(handler, 550, 600));
-		entityManager.addEntity(new TallGrass(handler, 600, 600));
-		entityManager.addEntity(new TallGrass(handler, 650, 600));
-		entityManager.addEntity(new SlimeEnemy(handler, 400, 800, Tile.TILEWIDTH, Tile.TILEHEIGHT));
+//		entityManager.addEntity(new Tree(handler, 100, 250));
+//		entityManager.addEntity(new Tree(handler, 250, 250));
+//		entityManager.addEntity(new Tree(handler, 250, 800));
+//		entityManager.addEntity(new TallGrass(handler, 550, 550));
+//		entityManager.addEntity(new TallGrass(handler, 600, 550));
+//		entityManager.addEntity(new TallGrass(handler, 650, 550));
+//		entityManager.addEntity(new TallGrass(handler, 550, 600));
+//		entityManager.addEntity(new TallGrass(handler, 600, 600));
+//		entityManager.addEntity(new TallGrass(handler, 650, 600));
+//		entityManager.addEntity(new SlimeEnemy(handler, 400, 800, Tile.TILEWIDTH, Tile.TILEHEIGHT));		
 		
-		
-		
-		loadLevel(path);
+		// loadLevel(path);
 		
 		entityManager.getPlayer().setX(spawnX*width);
 		entityManager.getPlayer().setY(spawnY*height);
@@ -69,23 +67,7 @@ public class Level {
 				getTile(x, y).render(g, (int) (x * Tile.TILEWIDTH - handler.getGameCamera().getxOffset()), 
 						(int) (y*Tile.TILEHEIGHT - handler.getGameCamera().getyOffset()));
 			}
-		}
-		
-			
-//			OpenSimplexNoise noise = new OpenSimplexNoise();
-//			BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-//			for (int y = 0; y < HEIGHT; y++)
-//			{
-//				for (int x = 0; x < WIDTH; x++)
-//				{
-//					double value = noise.eval(x / FEATURE_SIZE, y / FEATURE_SIZE, 0.0);
-//					int height = 0x010101 * (int)((value + 1) * 127.5);
-//					if (height > 10) {
-//						getTile(x, y).render(g, x, y);
-//					}
-//				}
-//			}
-			
+		}	
 		
 		//Items
 		itemManager.render(g);
