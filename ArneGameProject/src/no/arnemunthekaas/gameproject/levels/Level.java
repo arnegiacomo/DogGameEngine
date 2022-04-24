@@ -1,31 +1,27 @@
 package no.arnemunthekaas.gameproject.levels;
 
 import java.awt.Graphics;
+import java.util.Arrays;
+import java.util.Random;
 
 import no.arnemunthekaas.gameproject.Handler;
 import no.arnemunthekaas.gameproject.entities.EntityManager;
 import no.arnemunthekaas.gameproject.entities.creatures.Player;
-import no.arnemunthekaas.gameproject.entities.creatures.SlimeEnemy;
-import no.arnemunthekaas.gameproject.entities.statics.TallGrass;
-import no.arnemunthekaas.gameproject.entities.statics.Tree;
 import no.arnemunthekaas.gameproject.items.ItemManager;
 import no.arnemunthekaas.gameproject.tiles.Tile;
 import no.arnemunthekaas.gameproject.utils.Utils;
 
+
 public class Level {
 	
 	private Handler handler;
-	private int width, height;
+	private int width = 100, height = 100;
 	private int spawnX, spawnY;
 	private int[][] tiles;
 	//Entities
 	private EntityManager entityManager;
 	//Items
 	private ItemManager itemManager;
-	
-//	private static final int WIDTH = 512;
-//	private static final int HEIGHT = 512;
-//	private static final double FEATURE_SIZE = 24;
 	
 	public Level(Handler handler, String path) {
 		this.handler = handler;
@@ -44,15 +40,33 @@ public class Level {
 //		entityManager.addEntity(new TallGrass(handler, 650, 600));
 //		entityManager.addEntity(new SlimeEnemy(handler, 400, 800, Tile.TILEWIDTH, Tile.TILEHEIGHT));		
 		
-		loadLevel(path);
-		// generate();
+		//loadLevel(path);
+		generate();
 		
 		entityManager.getPlayer().setX(spawnX*width);
 		entityManager.getPlayer().setY(spawnY*height);
 	}
 
+	/**
+	 * Inspired by https://www.youtube.com/watch?v=20KHNA9jTsE&ab_channel=DVGen
+	 */
 	private void generate() {
-		// TODO Auto-generated method stub
+		// Init size
+		tiles = new int[width][height];
+		
+		Random random = new Random();
+		
+		// Prepopulate
+		for (int[] row: tiles)
+		    Arrays.fill(row, 5);
+		
+		// Test
+		for (int y = 0; y < 100; y++) {
+			for (int x = 0; x < 100; x++) {
+				tiles[x][y] = random.nextInt(10 - 0 + 1) + 0;
+			}
+		}
+		
 		
 	}
 
