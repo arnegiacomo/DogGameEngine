@@ -1,25 +1,21 @@
 package no.arnemunthekaas.gameproject.levels;
 
 import java.awt.Graphics;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
 
 import no.arnemunthekaas.gameproject.Handler;
 import no.arnemunthekaas.gameproject.entities.EntityManager;
 import no.arnemunthekaas.gameproject.entities.creatures.Player;
 import no.arnemunthekaas.gameproject.items.ItemManager;
+import no.arnemunthekaas.gameproject.levels.wfc.WFC;
 import no.arnemunthekaas.gameproject.tiles.Tile;
 import no.arnemunthekaas.gameproject.utils.Utils;
 
 public class Level {
 
 	private Handler handler;
-	private int width = 30, height = 30;
+	private int width = 50, height = 50;
 	private int spawnX, spawnY;
 	private int[][] tiles = new int[height][width];
-	private boolean[][] dirtyTiles = new boolean[height][width];
 
 	// Entities
 	private EntityManager entityManager;
@@ -55,124 +51,14 @@ public class Level {
 	 */
 	private void generate() {
 
-		Random random = new Random();
-
-		// Prepopulate
-		for (int[] row : tiles)
-			Arrays.fill(row, 5);
-
-		// Choose start location
-		int x = random.nextInt(width - 1 + 1);
-		int y = random.nextInt(height - 1 + 1);
-		spawnX = x;
-		spawnY = y;
-		updateTile(x, y, 5);
-
-	}
-
-	private void updateTile(int x, int y, int val) {
-		if(x < 0 || y < 0 || x > width-1 || y > height-1)
-			return;
+		WFC wfc = new WFC(width, height, Tile.tiles.length);
+		wfc.start();
 		
-		if (dirtyTiles[x][y] == true)
-			return;
-
-		Random random = new Random();
-		int newVal = random.nextInt(2 - 0 + 1) - 1 + val;
-		int diff = newVal - val;
-		
-		if (newVal < 0)
-			newVal++;
-		
-		if (newVal > 10)
-			newVal--;
-		
-		tiles[x][y] = newVal;
-		dirtyTiles[x][y] = true;
-
-		Set<Integer> neighbors = new HashSet<Integer>();
-
-		while (neighbors.size() < 8)
-			neighbors.add(random.nextInt(8 - 0 + 1));
-		
-		// Update neighbors
-		for (int i : neighbors) {
-			// Top left
-			if (i == 0 && !dirty(x - 1, y - 1))
-				tiles[x-1][y-1] -= diff;
-
-			// Top mid
-			if (i == 1 && !dirty(x, y - 1))
-				tiles[x][y-1] -= diff;
-			
-			// Top right
-			if (i == 2 && !dirty(x + 1, y - 1))
-				tiles[x+1][y-1] -= diff;
-			
-			// Left mid
-			if (i == 3 && !dirty(x - 1, y))
-				tiles[x-1][y] -= diff;
-			
-			// Right mid
-			if (i == 4 && !dirty(x + 1, y))
-				tiles[x+1][y] -= diff;
-			
-			// Bottom left
-			if (i == 5 && !dirty(x - 1, y + 1))
-				tiles[x-1][y+1] -= diff;
-			
-			// Bottom mid
-			if (i == 6 && !dirty(x, y + 1))
-				tiles[x][y+1] -= diff;
-			
-			// Bottom right
-			if (i == 7 && !dirty(x + 1, y + 1))
-				tiles[x+1][y+1] -= diff;
-		}
-
-		// Run for all neighbors
-		for (int i : neighbors) {
-			// Top left
-			if (i == 0 && !dirty(x - 1, y - 1))
-				updateTile(x - 1, y - 1, newVal);
-
-			// Top mid
-			if (i == 1 && !dirty(x, y - 1))
-				updateTile(x, y - 1, newVal);
-			
-			// Top right
-			if (i == 2 && !dirty(x + 1, y - 1))
-				updateTile(x + 1, y - 1, newVal);
-			
-			// Left mid
-			if (i == 3 && !dirty(x - 1, y))
-				updateTile(x - 1, y, newVal);
-			
-			// Right mid
-			if (i == 4 && !dirty(x + 1, y))
-				updateTile(x + 1, y, newVal);
-			
-			// Bottom left
-			if (i == 5 && !dirty(x - 1, y + 1))
-				updateTile(x - 1, y + 1, newVal);
-			
-			// Bottom mid
-			if (i == 6 && !dirty(x, y + 1))
-				updateTile(x, y + 1, newVal);
-			
-			// Bottom right
-			if (i == 7 && !dirty(x + 1, y + 1))
-				updateTile(x + 1, y + 1, newVal);
-		}
-
+		tiles = wfc.tiles;
+		spawnX = wfc.spawnX;
+		spawnY = wfc.spawnY;
 	}
 	
-	private boolean dirty(int x, int y) {
-		if(x < 0 || y < 0 || x > width-1 || y > height-1)
-			return true;
-		else return dirtyTiles[x][y];
-	}
-
 	public void tick() {
 		entityManager.tick();
 		itemManager.tick();
