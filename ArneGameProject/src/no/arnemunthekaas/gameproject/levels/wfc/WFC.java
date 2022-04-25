@@ -66,6 +66,7 @@ public class WFC {
 						nodes[x][y].neighbors.add(nodes[x + 1][y + 1]);
 					}
 				}
+
 			}
 		}
 
@@ -78,11 +79,13 @@ public class WFC {
 
 		nodes[spawnX][spawnY].tile = 5;
 		nodes[spawnX][spawnY].propagate();
-		
-		
 
 		for (int x = 0; x < tiles.length; x++) {
 			for (int y = 0; y < tiles[0].length; y++) {
+				nodes[x][y].genTile();
+				nodes[x][y].genTile();
+				nodes[x][y].genTile();
+				nodes[x][y].genTile();
 				tiles[x][y] = nodes[x][y].tile;
 			}
 		}

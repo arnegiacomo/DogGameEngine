@@ -141,7 +141,7 @@ public class Game implements Runnable {
 				// System.out.println("Ticks and Frames: " + ticks);
 				
 				//Temp testing
-				str = Integer.toString(ticks);
+				// str = Integer.toString(ticks);
 				
 				
 				ticks = 0;

@@ -12,7 +12,7 @@ public class Coast2 extends Tile{
 	
 	@Override
 	public boolean isSolid() {
-		return true;
+		return false;
 	}
 
 }
