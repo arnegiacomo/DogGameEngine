@@ -2,18 +2,18 @@ package no.arnemunthekaas.gameproject.states;
 
 import java.awt.Graphics;
 
-import no.arnemunthekaas.gameproject.Handler;
+import no.arnemunthekaas.gameproject.Game;
 import no.arnemunthekaas.gameproject.levels.Level;
 
 public class GameState extends State {
 	
 	private Level level;
 	
-	public GameState(Handler handler) {
-		super(handler);
+	public GameState() {
+		super();
 		
-		level = new Level(handler, "res/levels/level1.txt");
-		handler.setLevel(level);
+		level = new Level("res/levels/level1.txt");
+		Game.instance.level = level;
 		
 	}
 

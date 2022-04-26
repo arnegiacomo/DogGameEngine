@@ -3,12 +3,11 @@ package no.arnemunthekaas.gameproject.entities;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import no.arnemunthekaas.gameproject.Handler;
+import no.arnemunthekaas.gameproject.Game;
 
 public abstract class Entity {
 	
 	public static final int DEFAULT_HEALTH = 3;
-	protected Handler handler;
 	protected float x, y;
 	protected int width, height;
 	protected int health;
@@ -16,8 +15,7 @@ public abstract class Entity {
 	protected Rectangle bounds;
 
 	
-	public Entity(Handler handler, float x, float y, int width, int height) {
-		this.handler = handler;
+	public Entity(float x, float y, int width, int height) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -43,7 +41,7 @@ public abstract class Entity {
 	public abstract void die(); 
 	
 	public boolean checkEntityCollisions(float xOffset, float yOffset){
-		for(Entity e : handler.getLevel().getEntityManager().getEntities()){
+		for(Entity e : Game.instance.level.getEntityManager().getEntities()){
 			if(e.equals(this) || !e.hasCollision())
 				continue;
 			if(e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset)) )

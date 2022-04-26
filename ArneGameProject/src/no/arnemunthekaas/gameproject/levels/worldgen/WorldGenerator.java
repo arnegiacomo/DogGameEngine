@@ -1,11 +1,11 @@
-package no.arnemunthekaas.gameproject.levels.wfc;
+package no.arnemunthekaas.gameproject.levels.worldgen;
 
 import java.util.Arrays;
 import java.util.Random;
 
 import no.arnemunthekaas.gameproject.tiles.Tile;
 
-public class WFC {
+public class WorldGenerator {
 
 	public int spawnX;
 	public int spawnY;
@@ -14,9 +14,9 @@ public class WFC {
 
 	public int tileAmount;
 
-	private WFCnode[][] nodes;
+	private WorldGenNode[][] nodes;
 
-	public WFC(int width, int height, int tileAmount) {
+	public WorldGenerator(int width, int height, int tileAmount) {
 
 		this.tileAmount = tileAmount;
 
@@ -24,11 +24,11 @@ public class WFC {
 		for (int[] row : tiles)
 			Arrays.fill(row, -1);
 
-		nodes = new WFCnode[width][height];
+		nodes = new WorldGenNode[width][height];
 
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
-				nodes[x][y] = new WFCnode(Tile.tiles.length, x, y);
+				nodes[x][y] = new WorldGenNode(Tile.tiles.length, x, y);
 			}
 		}
 

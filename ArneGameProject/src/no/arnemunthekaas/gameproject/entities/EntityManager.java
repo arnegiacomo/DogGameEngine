@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 
-import no.arnemunthekaas.gameproject.Handler;
+import no.arnemunthekaas.gameproject.Game;
 import no.arnemunthekaas.gameproject.entities.creatures.Player;
 
 public class EntityManager {
 	
-	private Handler handler;
+	public static EntityManager instance;
+	
 	private Player player;
 	private ArrayList<Entity> entities;
 	private Comparator<Entity> renderSorter = new Comparator<Entity>(){
@@ -24,8 +25,8 @@ public class EntityManager {
 		}
 	};
 	
-	public EntityManager(Handler handler, Player player) {
-		this.handler = handler;
+	public EntityManager(Player player) {
+		instance = this;
 		this.player = player;
 		entities = new ArrayList<Entity>();
 		addEntity(player);
@@ -80,7 +81,7 @@ public class EntityManager {
 	}
 	
 	public boolean hasAggression(Entity e, int aggressionDistance) {
-		if (getDistance(handler.getLevel().getEntityManager().getPlayer(), e) < aggressionDistance) 
+		if (getDistance(Game.instance.level.getEntityManager().getPlayer(), e) < aggressionDistance) 
 			return true;
 		return false;
 		
@@ -93,14 +94,6 @@ public class EntityManager {
 
 	
 	//GETTERS SETTERS
-	
-	public Handler getHandler() {
-		return handler;
-	}
-
-	public void setHandler(Handler handler) {
-		this.handler = handler;
-	}
 
 	public Player getPlayer() {
 		return player;

@@ -10,12 +10,15 @@ import no.arnemunthekaas.gameproject.gfx.GameCamera;
 import no.arnemunthekaas.gameproject.gfx.Text;
 import no.arnemunthekaas.gameproject.input.KeyManager;
 import no.arnemunthekaas.gameproject.input.MouseManager;
+import no.arnemunthekaas.gameproject.levels.Level;
 import no.arnemunthekaas.gameproject.states.GameState;
 import no.arnemunthekaas.gameproject.states.MenuState;
 import no.arnemunthekaas.gameproject.states.SettingsState;
 import no.arnemunthekaas.gameproject.states.State;
 
 public class Game implements Runnable {
+	
+	public static Game instance;
 	
 	private String str;
 	
@@ -36,17 +39,18 @@ public class Game implements Runnable {
 	public State settingsState;
 	
 	//Input
-	private KeyManager keyManager;
-	private MouseManager mouseManager;
+	public KeyManager keyManager;
+	public MouseManager mouseManager;
 	
 	//Camera
-	private GameCamera gameCamera;
+	public GameCamera gameCamera;
 	
-	//Handler
-	private Handler handler;
+	//Level
+	public Level level;
 
 	
 	public Game(String title, int width, int height) {
+		this.instance = this;
 		this.width = width;
 		this.height = height;
 		this.title = title;
@@ -64,12 +68,11 @@ public class Game implements Runnable {
 		display.getCanvas().addMouseMotionListener(mouseManager);
 		Assets.init();
 		
-		handler = new Handler(this);
-		gameCamera = new GameCamera(handler, 0, 0);
+		gameCamera = new GameCamera(0, 0);
 
-		gameState = new GameState(handler);
-		menuState = new MenuState(handler);
-		settingsState = new SettingsState(handler);
+		gameState = new GameState();
+		menuState = new MenuState();
+		settingsState = new SettingsState();
 		State.setState(menuState);
 		
 	}

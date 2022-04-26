@@ -2,14 +2,14 @@ package no.arnemunthekaas.gameproject.entities.statics;
 
 import java.awt.Graphics;
 
-import no.arnemunthekaas.gameproject.Handler;
+import no.arnemunthekaas.gameproject.Game;
 import no.arnemunthekaas.gameproject.gfx.Assets;
 import no.arnemunthekaas.gameproject.tiles.Tile;
 
 public class TallGrass extends StaticEntity{
 
-	public TallGrass(Handler handler, float x, float y) {
-		super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT/2);
+	public TallGrass(float x, float y) {
+		super(x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT/2);
 		
 		//Hit box
 		bounds.x = 0;
@@ -32,8 +32,8 @@ public class TallGrass extends StaticEntity{
 
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(Assets.tallGrass, (int) (x - handler.getGameCamera().getxOffset()), 
-				(int) (y - handler.getGameCamera().getyOffset()), width, height, null);
+		g.drawImage(Assets.tallGrass, (int) (x - Game.instance.gameCamera.getxOffset()), 
+				(int) (y - Game.instance.gameCamera.getyOffset()), width, height, null);
 		
 		//Temp hitbox display
 //		g.drawRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()), 

@@ -1,16 +1,16 @@
 package no.arnemunthekaas.gameproject.gfx;
 
-import no.arnemunthekaas.gameproject.Handler;
+import no.arnemunthekaas.gameproject.Game;
 import no.arnemunthekaas.gameproject.entities.Entity;
 import no.arnemunthekaas.gameproject.tiles.Tile;
 
 public class GameCamera {
 	
-	private Handler handler;
+	public static GameCamera instance;
 	private float xOffset, yOffset;
 	
-	public GameCamera(Handler handler, float xOffset, float yOffset) {
-		this.handler = handler;
+	public GameCamera(float xOffset, float yOffset) {
+		instance = this;
 		this.xOffset = xOffset;
 		this.yOffset = yOffset;
 	}
@@ -18,22 +18,22 @@ public class GameCamera {
 	public void checkBlankSpace() {
 		if(xOffset < 0) {
 			xOffset = 0;
-		} else if(xOffset > handler.getLevel().getWidth() * Tile.TILEWIDTH - handler.getWidth()) {
-			xOffset = handler.getLevel().getWidth() * Tile.TILEWIDTH - handler.getWidth();
+		} else if(xOffset > Game.instance.level.getWidth() * Tile.TILEWIDTH - Game.instance.getWidth()) {
+			xOffset = Game.instance.level.getWidth() * Tile.TILEWIDTH - Game.instance.getWidth();
 		}
 		
 		if(yOffset < 0) {
 			yOffset = 0;
-		} else if(yOffset > handler.getLevel().getHeight() * Tile.TILEHEIGHT - handler.getHeight()) {
-			yOffset = handler.getLevel().getHeight() * Tile.TILEHEIGHT - handler.getHeight();
+		} else if(yOffset > Game.instance.level.getHeight() * Tile.TILEHEIGHT - Game.instance.getHeight()) {
+			yOffset = Game.instance.level.getHeight() * Tile.TILEHEIGHT - Game.instance.getHeight();
 		}
 		
 		
 	}
 	
 	public void centerOnEntity(Entity e) {
-		xOffset = e.getX() - handler.getWidth() / 2 + e.getWidth() / 22;
-		yOffset = e.getY() - handler.getHeight() / 2 + e.getHeight() / 2; 
+		xOffset = e.getX() - Game.instance.getWidth() / 2 + e.getWidth() / 22;
+		yOffset = e.getY() - Game.instance.getHeight() / 2 + e.getHeight() / 2; 
 		checkBlankSpace();
 	}
 	

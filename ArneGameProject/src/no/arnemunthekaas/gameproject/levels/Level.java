@@ -2,17 +2,18 @@ package no.arnemunthekaas.gameproject.levels;
 
 import java.awt.Graphics;
 
-import no.arnemunthekaas.gameproject.Handler;
+import no.arnemunthekaas.gameproject.Game;
 import no.arnemunthekaas.gameproject.entities.EntityManager;
 import no.arnemunthekaas.gameproject.entities.creatures.Player;
 import no.arnemunthekaas.gameproject.items.ItemManager;
-import no.arnemunthekaas.gameproject.levels.wfc.WFC;
+import no.arnemunthekaas.gameproject.levels.worldgen.WorldGenerator;
 import no.arnemunthekaas.gameproject.tiles.Tile;
 import no.arnemunthekaas.gameproject.utils.Utils;
 
 public class Level {
+	
+	public static Level instance;
 
-	private Handler handler;
 	private int width = 50, height = 50;
 	private int spawnX, spawnY;
 	private int[][] tiles = new int[height][width];
@@ -22,10 +23,11 @@ public class Level {
 	// Items
 	private ItemManager itemManager;
 
-	public Level(Handler handler, String path) {
-		this.handler = handler;
-		entityManager = new EntityManager(handler, new Player(handler, 100, 100));
-		itemManager = new ItemManager(handler);
+	public Level(String path) {
+		instance = this;
+		
+		entityManager = new EntityManager(new Player(100, 100));
+		itemManager = new ItemManager();
 
 		// Temp entities
 //		entityManager.addEntity(new Tree(handler, 100, 250));
@@ -49,9 +51,9 @@ public class Level {
 	/**
 	 * Inspired by https://www.youtube.com/watch?v=20KHNA9jTsE&ab_channel=DVGen
 	 */
-	private void generate() {
+	public void generate() {
 
-		WFC wfc = new WFC(width, height, Tile.tiles.length);
+		WorldGenerator wfc = new WorldGenerator(width, height, Tile.tiles.length);
 		wfc.start();
 		
 		tiles = wfc.tiles;
@@ -65,17 +67,17 @@ public class Level {
 	}
 
 	public void render(Graphics g) {
-		int xStart = (int) Math.max(0, handler.getGameCamera().getxOffset() / Tile.TILEWIDTH);
+		int xStart = (int) Math.max(0, Game.instance.gameCamera.getxOffset() / Tile.TILEWIDTH);
 		int xEnd = (int) Math.min(width,
-				(handler.getGameCamera().getxOffset() + handler.getWidth()) / Tile.TILEWIDTH + 1);
-		int yStart = (int) Math.max(0, handler.getGameCamera().getyOffset() / Tile.TILEHEIGHT);
+				(Game.instance.gameCamera.getxOffset() + Game.instance.getWidth()) / Tile.TILEWIDTH + 1);
+		int yStart = (int) Math.max(0, Game.instance.getGameCamera().getyOffset() / Tile.TILEHEIGHT);
 		int yEnd = (int) Math.min(height,
-				(handler.getGameCamera().getyOffset() + handler.getHeight()) / Tile.TILEHEIGHT + 1);
+				(Game.instance.gameCamera.getyOffset() + Game.instance.getHeight()) / Tile.TILEHEIGHT + 1);
 
 		for (int y = yStart; y < yEnd; y++) {
 			for (int x = xStart; x < xEnd; x++) {
-				getTile(x, y).render(g, (int) (x * Tile.TILEWIDTH - handler.getGameCamera().getxOffset()),
-						(int) (y * Tile.TILEHEIGHT - handler.getGameCamera().getyOffset()));
+				getTile(x, y).render(g, (int) (x * Tile.TILEWIDTH - Game.instance.gameCamera.getxOffset()),
+						(int) (y * Tile.TILEHEIGHT - Game.instance.gameCamera.getyOffset()));
 			}
 		}
 
@@ -122,14 +124,6 @@ public class Level {
 
 	public int getWidth() {
 		return width;
-	}
-
-	public Handler getHandler() {
-		return handler;
-	}
-
-	public void setHandler(Handler handler) {
-		this.handler = handler;
 	}
 
 	public ItemManager getItemManager() {

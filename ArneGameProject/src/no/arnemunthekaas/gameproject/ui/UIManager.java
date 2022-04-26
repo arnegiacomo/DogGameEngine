@@ -4,15 +4,13 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import no.arnemunthekaas.gameproject.Handler;
-
 public class UIManager {
 	
-	private Handler handler;
+	public static UIManager instance;
 	private ArrayList<UIObject> objects;
 	
-	public UIManager(Handler handler) {
-		this.handler = handler;
+	public UIManager() {
+		instance = this;
 		objects = new ArrayList<UIObject>();
 	}
 	
@@ -34,14 +32,6 @@ public class UIManager {
 	public void onMouseRelease(MouseEvent e) {
 		for(UIObject o : objects)
 			o.onMouseRelease(e);
-	}
-	
-	public Handler getHandler() {
-		return handler;
-	}
-
-	public void setHandler(Handler handler) {
-		this.handler = handler;
 	}
 
 	public ArrayList<UIObject> getObjects() {

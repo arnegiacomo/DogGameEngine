@@ -2,7 +2,7 @@ package no.arnemunthekaas.gameproject.entities.creatures;
 
 import java.awt.Graphics;
 
-import no.arnemunthekaas.gameproject.Handler;
+import no.arnemunthekaas.gameproject.Game;
 import no.arnemunthekaas.gameproject.gfx.Assets;
 
 public class SlimeEnemy extends Creature{
@@ -14,8 +14,8 @@ public class SlimeEnemy extends Creature{
 	private int knockBack = 50;
 	private int attackReach = 50;
 
-	public SlimeEnemy(Handler handler, float x, float y, int width, int height) {
-		super(handler, x, y, width, height);
+	public SlimeEnemy(float x, float y, int width, int height) {
+		super(x, y, width, height);
 		this.setHealth(slimeHealth);
 		
 		//Hit box
@@ -36,8 +36,8 @@ public class SlimeEnemy extends Creature{
 	@Override
 	public void render(Graphics g) {
 		
-		g.drawImage(Assets.slime, (int) (x - handler.getGameCamera().getxOffset()), 
-				(int) (y - handler.getGameCamera().getyOffset()), width, height, null);
+		g.drawImage(Assets.slime, (int) (x - Game.instance.gameCamera.getxOffset()), 
+				(int) (y - Game.instance.gameCamera.getyOffset()), width, height, null);
 		
 		//temp hitbox display
 //		g.drawRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()), 
@@ -61,14 +61,14 @@ public class SlimeEnemy extends Creature{
 	public void movementAI() {
 		xMove = 0;
 		yMove = 0;
-		if (handler.getLevel().getEntityManager().hasAggression(this, agressionDistance)) {
-			if((handler.getLevel().getEntityManager().getXDistance(handler.getLevel().getEntityManager().getPlayer(), this) < 0)) {
+		if (Game.instance.level.getEntityManager().hasAggression(this, agressionDistance)) {
+			if((Game.instance.level.getEntityManager().getXDistance(Game.instance.level.getEntityManager().getPlayer(), this) < 0)) {
 				xMove = -slimeMovementSpeed;
 			} else {
 				xMove = slimeMovementSpeed;
 			}
 			
-			if((handler.getLevel().getEntityManager().getYDistance(handler.getLevel().getEntityManager().getPlayer(), this) < 0)) {
+			if((Game.instance.level.getEntityManager().getYDistance(Game.instance.level.getEntityManager().getPlayer(), this) < 0)) {
 				yMove = -slimeMovementSpeed;
 			} else {
 				yMove = slimeMovementSpeed;
@@ -78,9 +78,9 @@ public class SlimeEnemy extends Creature{
 	
 	public void checkAttacks() {
 		//Add cooldown
-		if (handler.getLevel().getEntityManager().getDistance(this, handler.getLevel().getEntityManager().getPlayer()) <= attackReach &&
-				handler.getLevel().getEntityManager().getDistance(this, handler.getLevel().getEntityManager().getPlayer()) >= -attackReach) {
-			handler.getLevel().getEntityManager().getPlayer().hurt(slimeDamage);
+		if (Game.instance.level.getEntityManager().getDistance(this, Game.instance.level.getEntityManager().getPlayer()) <= attackReach &&
+				Game.instance.level.getEntityManager().getDistance(this, Game.instance.level.getEntityManager().getPlayer()) >= -attackReach) {
+			Game.instance.level.getEntityManager().getPlayer().hurt(slimeDamage);
 
 			
 			//Knockback stuff

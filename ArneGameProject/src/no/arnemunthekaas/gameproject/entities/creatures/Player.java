@@ -4,12 +4,14 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import no.arnemunthekaas.gameproject.Handler;
+import no.arnemunthekaas.gameproject.Game;
 import no.arnemunthekaas.gameproject.audio.AudioAssets;
 import no.arnemunthekaas.gameproject.entities.Entity;
 import no.arnemunthekaas.gameproject.gfx.Animation;
 import no.arnemunthekaas.gameproject.gfx.Assets;
+import no.arnemunthekaas.gameproject.input.KeyManager;
 import no.arnemunthekaas.gameproject.inventory.Inventory;
+import no.arnemunthekaas.gameproject.levels.Level;
 import no.arnemunthekaas.gameproject.states.GameState;
 import no.arnemunthekaas.gameproject.states.MenuState;
 import no.arnemunthekaas.gameproject.states.State;
@@ -51,8 +53,8 @@ public class Player extends Creature {
 	
 	
 	
-	public Player(Handler handler, float x, float y) {
-		super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
+	public Player(float x, float y) {
+		super(x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
 		
 		//Declares Hitbox
 		bounds.x = 10;
@@ -68,7 +70,7 @@ public class Player extends Creature {
 		animStill = new Animation(animSpeed, Assets.player_still);
 		
 		//Inventory
-		inventory = new Inventory(handler);
+		inventory = new Inventory();
 		
 		//Health
 		setHealth(health);
@@ -87,17 +89,22 @@ public class Player extends Creature {
 		//Movement
 		getInput();
 		move();
-		handler.getGameCamera().centerOnEntity(this);
+		Game.instance.gameCamera.centerOnEntity(this);
 		
 		//Check facing direction before attacks
 		
 		
 		//Attack
 //		checkAttacks();
-		
+		checkGenerateNewMap();
 		
 		//Inventory
 		inventory.tick();
+	}
+	
+	private void checkGenerateNewMap() {
+		if (KeyManager.instance.generateNewMap)
+			Level.instance.generate();
 	}
 	
 	private void checkAttacks() {
@@ -112,7 +119,7 @@ public class Player extends Creature {
 		ar.width = arSize;
 		ar.height = arSize;
 		
-		if(!handler.getKeyManager().melee) {
+		if(!Game.instance.keyManager.melee) {
 			attackHitbox = null;
 			return;
 		}
@@ -151,7 +158,7 @@ public class Player extends Creature {
 		attackTimer = 0;
 		AudioAssets.bark.playSound();
 		
-		for (Entity e : handler.getLevel().getEntityManager().getEntities()) {
+		for (Entity e : Game.instance.level.getEntityManager().getEntities()) {
 			if(e.equals(this))
 				continue;
 			if(e.getCollisionBounds(0, 0).intersects(ar)) {
@@ -165,28 +172,28 @@ public class Player extends Creature {
 	
 	@Override
 	public void die() {
-		handler.getGame().gameState = new GameState(handler);
-		menuState = new MenuState(handler);
-		State.setState(menuState);
+//		Game.instance.gameState = new GameState();
+//		menuState = new MenuState();
+//		State.setState(menuState);
 	}
 	
 	private void getInput() {
 		xMove = 0;
 		yMove = 0;
 		
-		if(handler.getKeyManager().up) {
+		if(Game.instance.keyManager.up) {
 			yMove = -speed;
 		}
 		
-		if(handler.getKeyManager().down) {
+		if(Game.instance.keyManager.down) {
 			yMove = speed;
 		}
 		
-		if(handler.getKeyManager().left) {
+		if(Game.instance.keyManager.left) {
 			xMove = -speed;
 		}
 		
-		if(handler.getKeyManager().right) {
+		if(Game.instance.keyManager.right) {
 			xMove = speed;
 		}
 		
@@ -197,8 +204,8 @@ public class Player extends Creature {
 
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(getCurrentAnimationFrame(), (int) (x - handler.getGameCamera().getxOffset()), 
-				(int) (y - handler.getGameCamera().getyOffset()), width, height, null);
+		g.drawImage(getCurrentAnimationFrame(), (int) (x - Game.instance.gameCamera.getxOffset()), 
+				(int) (y -  Game.instance.gameCamera.getyOffset()), width, height, null);
 		
 		// Display Hitbox
 		
@@ -219,7 +226,7 @@ public class Player extends Creature {
 		inventory.render(g);
 		
 		if(!(attackHitbox == null))
-		g.drawImage(Assets.biteAttack, (int) (attackHitbox.x - handler.getGameCamera().getxOffset()), (int) (attackHitbox.y - handler.getGameCamera().getyOffset()), 
+		g.drawImage(Assets.biteAttack, (int) (attackHitbox.x -  Game.instance.gameCamera.getxOffset()), (int) (attackHitbox.y -  Game.instance.gameCamera.getyOffset()), 
 				attackHitbox.width, attackHitbox.height, null); //attack anim
 	}
 	

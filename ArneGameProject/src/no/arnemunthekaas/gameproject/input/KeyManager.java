@@ -5,10 +5,16 @@ import java.awt.event.KeyListener;
 
 public class KeyManager implements KeyListener {
 	
+	public static KeyManager instance;
+	
 	private boolean[] keys, justPressed, cantPress;
 	public boolean up, down, left, right, melee; //Player Controls
 	
+	public boolean generateNewMap;
+	
 	public KeyManager() {
+		instance = this;
+		
 		keys = new boolean[256];
 		justPressed = new boolean[keys.length];
 		cantPress = new boolean[keys.length];
@@ -33,6 +39,7 @@ public class KeyManager implements KeyListener {
 		left = keys[KeyEvent.VK_A];
 		right = keys[KeyEvent.VK_D];
 		melee = keys[KeyEvent.VK_V];
+		generateNewMap = keys[KeyEvent.VK_G];
 	}
 	
 	public boolean keyJustPressed(int keyCode){

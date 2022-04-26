@@ -4,16 +4,16 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import no.arnemunthekaas.gameproject.Handler;
-
 public class ItemManager {
 	
-	private Handler handler;
-	private ArrayList<Item> items;
+	public static ItemManager instance;
 	
 
-	public ItemManager(Handler handler) {
-		this.handler = handler;
+	public ArrayList<Item> items;
+	
+
+	public ItemManager() {
+		instance = this;
 		items = new ArrayList<Item>();
 	}
 	
@@ -33,19 +33,9 @@ public class ItemManager {
 	}
 	
 	public void addItem(Item i) {
-		i.setHandler(handler);
 		items.add(i);
 	}
 
-	//GETTERS SETTERS
-	
-	public Handler getHandler() {
-		return handler;
-	}
-
-	public void setHandler(Handler handler) {
-		this.handler = handler;
-	}
 	
 	
 

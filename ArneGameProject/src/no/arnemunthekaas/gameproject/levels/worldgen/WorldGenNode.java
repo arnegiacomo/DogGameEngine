@@ -1,4 +1,4 @@
-package no.arnemunthekaas.gameproject.levels.wfc;
+package no.arnemunthekaas.gameproject.levels.worldgen;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class WFCnode {
+public class WorldGenNode {
 	
 	public int tileamount;
 	public int x;
 	public int y;
-	public List<WFCnode> neighbors = new ArrayList<WFCnode>();
+	public List<WorldGenNode> neighbors = new ArrayList<WorldGenNode>();
 	public int tile = -1;
 	
 	public boolean collapsed;
@@ -19,7 +19,7 @@ public class WFCnode {
 	public int propnum;
 	
 	
-	public WFCnode(int tileamount, int x, int y) {
+	public WorldGenNode(int tileamount, int x, int y) {
 		this.tileamount = tileamount;
 		this.propnum = 5;
 		this.x = x;
@@ -60,7 +60,7 @@ public class WFCnode {
 		
 		collapsed = true;
 		
-		for(WFCnode neighbor : neighbors) {
+		for(WorldGenNode neighbor : neighbors) {
 			if(neighbor.x == x || neighbor.y == y) {
 				neighbor.propnum -= 2;
 				

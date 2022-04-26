@@ -2,8 +2,6 @@ package no.arnemunthekaas.gameproject.states;
 
 import java.awt.Graphics;
 
-import no.arnemunthekaas.gameproject.Handler;
-
 public abstract class State {
 	
 	private static State currentState = null;
@@ -18,10 +16,7 @@ public abstract class State {
 	
 	//CLASS
 	
-	protected Handler handler;
-	
-	public State(Handler handler) {
-		this.handler = handler;
+	public State() {
 	}
 	
 	public abstract void tick();

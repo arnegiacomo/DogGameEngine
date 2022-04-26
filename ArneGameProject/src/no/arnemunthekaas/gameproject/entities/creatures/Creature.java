@@ -1,6 +1,6 @@
 package no.arnemunthekaas.gameproject.entities.creatures;
 
-import no.arnemunthekaas.gameproject.Handler;
+import no.arnemunthekaas.gameproject.Game;
 import no.arnemunthekaas.gameproject.entities.Entity;
 import no.arnemunthekaas.gameproject.tiles.Tile;
 
@@ -14,8 +14,8 @@ public abstract class Creature extends Entity {
 	protected float speed;
 	protected float xMove, yMove;
 
-	public Creature(Handler handler, float x, float y, int width, int height) {
-		super(handler, x, y, width, height);
+	public Creature(float x, float y, int width, int height) {
+		super(x, y, width, height);
 		speed = DEFAULT_SPEED;
 		xMove = 0;
 		yMove = 0;
@@ -76,7 +76,7 @@ public abstract class Creature extends Entity {
 	}
 	
 	protected boolean collisionWithTile(int x, int y) {
-		return handler.getLevel().getTile(x, y).isSolid();
+		return Game.instance.level.getTile(x, y).isSolid();
 	}
 	
 	//GETTERS SETTERS

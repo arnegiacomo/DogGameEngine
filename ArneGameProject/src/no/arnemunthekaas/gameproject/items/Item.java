@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import no.arnemunthekaas.gameproject.Handler;
+import no.arnemunthekaas.gameproject.Game;
 import no.arnemunthekaas.gameproject.gfx.Assets;
 
 public class Item {
@@ -18,7 +18,6 @@ public class Item {
 
 	public static final int ITEMWIDTH = 32, ITEMHEIGHT = 32;
 	
-	protected Handler handler;
 	protected BufferedImage texture;
 	protected String name;
 	protected final int id;
@@ -39,16 +38,14 @@ public class Item {
 	}
 	
 	public void tick() {
-		if(handler.getLevel().getEntityManager().getPlayer().getCollisionBounds(0f, 0f).intersects(bounds) ) {
+		if(Game.instance.level.getEntityManager().getPlayer().getCollisionBounds(0f, 0f).intersects(bounds) ) {
 			pickedUp = true;
-			handler.getLevel().getEntityManager().getPlayer().getInventory().addItem(this);
+			Game.instance.level.getEntityManager().getPlayer().getInventory().addItem(this);
 		}
 	}
 	
 	public void render(Graphics g) {
-		if(handler == null)
-			return;
-		render(g, (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()));
+		render(g, (int) (x - Game.instance.gameCamera.getxOffset()), (int) (y - Game.instance.gameCamera.getyOffset()));
 	}
 	
 	public void render(Graphics g, int x, int y) {
@@ -78,20 +75,11 @@ public class Item {
 	}
 	
 	//GETTERS SETTERS
-	
-	
-
-	public Handler getHandler() {
-		return handler;
-	}
 
 	public boolean isPickedUp() {
 		return pickedUp;
 	}
 
-	public void setHandler(Handler handler) {
-		this.handler = handler;
-	}
 
 	public BufferedImage getTexture() {
 		return texture;
