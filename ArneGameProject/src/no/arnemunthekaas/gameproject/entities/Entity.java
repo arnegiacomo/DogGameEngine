@@ -13,6 +13,7 @@ public abstract class Entity {
 	protected int health;
 	protected boolean active = true;
 	protected Rectangle bounds;
+	public int zIndex;
 
 	
 	public Entity(float x, float y, int width, int height) {

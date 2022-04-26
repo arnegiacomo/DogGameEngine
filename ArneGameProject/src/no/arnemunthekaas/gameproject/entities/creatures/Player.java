@@ -96,16 +96,11 @@ public class Player extends Creature {
 		
 		//Attack
 //		checkAttacks();
-		checkGenerateNewMap();
 		
 		//Inventory
 		inventory.tick();
 	}
 	
-	private void checkGenerateNewMap() {
-		if (KeyManager.instance.generateNewMap)
-			Level.instance.generate();
-	}
 	
 	private void checkAttacks() {
 		attackTimer += System.currentTimeMillis() - lastAttackTimer;

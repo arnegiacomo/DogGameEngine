@@ -50,7 +50,7 @@ public class Game implements Runnable {
 
 	
 	public Game(String title, int width, int height) {
-		this.instance = this;
+		instance = this;
 		this.width = width;
 		this.height = height;
 		this.title = title;

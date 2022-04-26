@@ -15,6 +15,7 @@ public class Assets {
 		
 		//Static Entities
 		public static BufferedImage pine1, pine2, tallGrass;
+		public static BufferedImage grass, gravel, waves;  
 		//Entities
 		
 		//Enemies
@@ -43,6 +44,8 @@ public class Assets {
 			// Sprite sheets
 			
 			SpriteSheet worldGenSheet = new SpriteSheet(ImageLoader.loadImage("/images/spritesheets/terrain.png"));
+			
+			SpriteSheet tileSurfaces = new SpriteSheet(ImageLoader.loadImage("/images/spritesheets/tileSurfaces.png"));
 			
 			SpriteSheet TeddySheet = new SpriteSheet(ImageLoader.loadImage("/images/spritesheets/teddySprites.png"));
 			SpriteSheet AttacksSheet = new SpriteSheet(ImageLoader.loadImage("/images/spritesheets/attacksSprites.png"));
@@ -117,10 +120,11 @@ public class Assets {
 			
 //			log = TerrainSheet.crop(32, 0, 16, 16);
 //			
-//			//Static Entities
-//			pine1 = TerrainSheet.crop(16, 0, 16, 32);
-//			pine2 = TerrainSheet.crop(16, 32, 16, 32);
-//			tallGrass = TerrainSheet.crop(16, 64, 16, 16);
+			//Static Entities
+			
+			grass = tileSurfaces.crop(0, 0, terrainWidth, terrainHeight);
+			gravel = tileSurfaces.crop(terrainWidth, 0, terrainWidth, terrainHeight);
+			waves = tileSurfaces.crop(terrainWidth * 2, 0, terrainWidth, terrainHeight);
 			
 			//Enemies
 			

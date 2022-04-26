@@ -7,6 +7,7 @@ import java.util.Iterator;
 
 import no.arnemunthekaas.gameproject.Game;
 import no.arnemunthekaas.gameproject.entities.creatures.Player;
+import no.arnemunthekaas.gameproject.input.KeyManager;
 
 public class EntityManager {
 	
@@ -18,10 +19,13 @@ public class EntityManager {
 
 		@Override
 		public int compare(Entity a, Entity b) {
-			if(a.getY() + a.getHeight() < b.getY() + b.getHeight()) {
-				return -1;
+			if(a.zIndex > b.zIndex) {
+				return 1;
 			}
-			return 1;
+//			if(a.getY() + a.getHeight() < b.getY() + b.getHeight()) {
+//				return -1;
+//			}
+			return -1;
 		}
 	};
 	
@@ -34,14 +38,14 @@ public class EntityManager {
 	}
 	
 	public void tick() {
-		Iterator<Entity> it = entities.iterator();
-		while(it.hasNext()) {
-			Entity e = it.next();
-			e.tick();
-			if(!e.isActive()) 
-				it.remove();
-		}
-		entities.sort(renderSorter);
+			Iterator<Entity> it = entities.iterator();
+			while(it.hasNext()) {
+				Entity e = it.next();
+				e.tick();
+				if(!e.isActive()) 
+					it.remove();
+			}
+			entities.sort(renderSorter);
 	}
 	
 	public void render(Graphics g) {

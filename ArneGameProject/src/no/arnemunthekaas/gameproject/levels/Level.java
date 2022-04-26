@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import no.arnemunthekaas.gameproject.Game;
 import no.arnemunthekaas.gameproject.entities.EntityManager;
 import no.arnemunthekaas.gameproject.entities.creatures.Player;
+import no.arnemunthekaas.gameproject.entities.statics.Gravel;
+import no.arnemunthekaas.gameproject.input.KeyManager;
 import no.arnemunthekaas.gameproject.items.ItemManager;
 import no.arnemunthekaas.gameproject.levels.worldgen.WorldGenerator;
 import no.arnemunthekaas.gameproject.tiles.Tile;
@@ -19,9 +21,9 @@ public class Level {
 	private int[][] tiles = new int[height][width];
 
 	// Entities
-	private EntityManager entityManager;
+	public EntityManager entityManager;
 	// Items
-	private ItemManager itemManager;
+	public ItemManager itemManager;
 
 	public Level(String path) {
 		instance = this;
@@ -41,6 +43,7 @@ public class Level {
 //		entityManager.addEntity(new TallGrass(handler, 650, 600));
 //		entityManager.addEntity(new SlimeEnemy(handler, 400, 800, Tile.TILEWIDTH, Tile.TILEHEIGHT));		
 
+		
 		// loadLevel(path);
 		generate();
 
@@ -52,6 +55,7 @@ public class Level {
 	 * Inspired by https://www.youtube.com/watch?v=20KHNA9jTsE&ab_channel=DVGen
 	 */
 	public void generate() {
+		entityManager = new EntityManager(new Player(100, 100));
 
 		WorldGenerator wfc = new WorldGenerator(width, height, Tile.tiles.length);
 		wfc.start();
@@ -62,6 +66,8 @@ public class Level {
 	}
 	
 	public void tick() {
+		if (KeyManager.instance.generateNewMap)
+			Level.instance.generate();
 		entityManager.tick();
 		itemManager.tick();
 	}
