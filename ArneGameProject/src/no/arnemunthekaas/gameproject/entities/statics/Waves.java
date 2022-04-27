@@ -8,7 +8,7 @@ import no.arnemunthekaas.gameproject.tiles.Tile;
 
 public class Waves extends StaticEntity {
 	
-	public static int frequency = 9;
+	public static int frequency = 5;
 
 	public Waves(float x, float y) {
 		super(x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
