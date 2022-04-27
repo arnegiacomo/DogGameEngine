@@ -3,11 +3,8 @@ package no.arnemunthekaas.gameproject.levels.worldgen;
 import java.util.Arrays;
 import java.util.Random;
 
-import no.arnemunthekaas.gameproject.Game;
 import no.arnemunthekaas.gameproject.entities.EntityManager;
-import no.arnemunthekaas.gameproject.entities.statics.Grass;
-import no.arnemunthekaas.gameproject.entities.statics.Gravel;
-import no.arnemunthekaas.gameproject.entities.statics.Waves;
+import no.arnemunthekaas.gameproject.entities.statics.*;
 import no.arnemunthekaas.gameproject.levels.Level;
 import no.arnemunthekaas.gameproject.tiles.Tile;
 
@@ -96,14 +93,31 @@ public class WorldGenerator {
 				nodes[x][y].genTile();
 				tiles[x][y] = nodes[x][y].tile;
 				
-				if (tiles[x][y] == Tile.DefaultGrass5.getId() || tiles[x][y] == Tile.DarkGrass6.getId())
+				int randomnum = random.nextInt(11);
+				
+				if ((tiles[x][y] == Tile.DefaultGrass5.getId() || tiles[x][y] == Tile.DarkGrass6.getId()) && randomnum <= Grass.frequency)
 					Level.instance.entityManager.addEntity(new Grass(x * Tile.TILEWIDTH, y * Tile.TILEHEIGHT));
 				
-				if (tiles[x][y] == Tile.Beach3.getId())
+				if (tiles[x][y] == Tile.Beach3.getId() && randomnum <= Gravel.frequency)
 					Level.instance.entityManager.addEntity(new Gravel(x * Tile.TILEWIDTH, y * Tile.TILEHEIGHT));
 				
-				if (tiles[x][y] == Tile.DeepOcean0.getId() || tiles[x][y] == Tile.Ocean1.getId())
+				if (tiles[x][y] == Tile.Coast2.getId() && randomnum <= Algae.frequency)
+					Level.instance.entityManager.addEntity(new Algae(x * Tile.TILEWIDTH, y * Tile.TILEHEIGHT));
+				
+				if (tiles[x][y] == Tile.LightGrass4.getId() && randomnum <= Blueflowers.frequency)
+					Level.instance.entityManager.addEntity(new Blueflowers(x * Tile.TILEWIDTH, y * Tile.TILEHEIGHT));
+				
+				if ((tiles[x][y] == Tile.DeepOcean0.getId() || tiles[x][y] == Tile.Ocean1.getId()) && randomnum <= Waves.frequency)
 					Level.instance.entityManager.addEntity(new Waves(x * Tile.TILEWIDTH, y * Tile.TILEHEIGHT));
+				
+				if (tiles[x][y] == Tile.DarkerGrass7.getId() && randomnum <= Redflowers.frequency)
+					Level.instance.entityManager.addEntity(new Redflowers(x * Tile.TILEWIDTH, y * Tile.TILEHEIGHT));
+				
+				if (tiles[x][y] == Tile.DarkestGrass8.getId() && randomnum <= Mud.frequency)
+					Level.instance.entityManager.addEntity(new Mud(x * Tile.TILEWIDTH, y * Tile.TILEHEIGHT));
+				
+				if ((tiles[x][y] == Tile.LightRock9.getId() || tiles[x][y] == Tile.Rock10.getId()) && randomnum <= Moss.frequency)
+					Level.instance.entityManager.addEntity(new Moss(x * Tile.TILEWIDTH, y * Tile.TILEHEIGHT));
 			}
 		}
 

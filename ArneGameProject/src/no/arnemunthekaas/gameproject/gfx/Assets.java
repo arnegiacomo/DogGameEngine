@@ -11,15 +11,15 @@ public class Assets {
 		public static final int terrainWidth = 16, terrainHeight = 16;
 		
 		//Items
-		public static BufferedImage log; 
+
 		
 		//Static Entities
-		public static BufferedImage pine1, pine2, tallGrass;
-		public static BufferedImage grass, gravel, waves;  
+		public static BufferedImage grass, gravel, waves, moss, mud, blueflowers, redflowers, algae;  
+		
 		//Entities
 		
 		//Enemies
-		public static BufferedImage slime;
+
 		
 		//Player Animantions
 		public static BufferedImage[] player_down, player_up, player_left, player_right, player_still;
@@ -52,7 +52,6 @@ public class Assets {
 			
 			// UI
 			
-			inventoryScreen = ImageLoader.loadImage("/images/inventoryScreen.png");
 			SpriteSheet PlayButton = new SpriteSheet(ImageLoader.loadImage("/images/playbutton.png"));
 			
 			button_start = new BufferedImage[2];
@@ -118,19 +117,19 @@ public class Assets {
 			
 			//Items
 			
-//			log = TerrainSheet.crop(32, 0, 16, 16);
-//			
 			//Static Entities
 			
 			grass = tileSurfaces.crop(0, 0, terrainWidth, terrainHeight);
 			gravel = tileSurfaces.crop(terrainWidth, 0, terrainWidth, terrainHeight);
 			waves = tileSurfaces.crop(terrainWidth * 2, 0, terrainWidth, terrainHeight);
+			moss = tileSurfaces.crop(terrainWidth * 3, 0, terrainWidth, terrainHeight);
+			mud = tileSurfaces.crop(0, terrainHeight, terrainWidth, terrainHeight);
+			blueflowers = tileSurfaces.crop(terrainWidth, terrainHeight, terrainWidth, terrainHeight);
+			redflowers = tileSurfaces.crop(terrainWidth * 2, terrainHeight, terrainWidth, terrainHeight);
+			algae = tileSurfaces.crop(terrainWidth * 3, terrainHeight, terrainWidth, terrainHeight);
 			
 			//Enemies
 			
-			// SpriteSheet slimeSprite = new SpriteSheet(ImageLoader.loadImage("/textures/slimeEnemy.png"));
-			
-			// slime = slimeSprite.crop(0,0,32,32);
 			
 			//Attacks
 			

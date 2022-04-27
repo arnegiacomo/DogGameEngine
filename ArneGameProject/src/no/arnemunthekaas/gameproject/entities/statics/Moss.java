@@ -6,11 +6,11 @@ import no.arnemunthekaas.gameproject.Game;
 import no.arnemunthekaas.gameproject.gfx.Assets;
 import no.arnemunthekaas.gameproject.tiles.Tile;
 
-public class Waves extends StaticEntity {
+public class Moss extends StaticEntity{
 	
-	public static int frequency = 9;
+	public static int frequency = 1;
 
-	public Waves(float x, float y) {
+	public Moss(float x, float y) {
 		super(x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 		this.zIndex = -100;
 	}
@@ -23,7 +23,7 @@ public class Waves extends StaticEntity {
 
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(Assets.waves, (int) (x - Game.instance.gameCamera.getxOffset()), 
+		g.drawImage(Assets.moss, (int) (x - Game.instance.gameCamera.getxOffset()), 
 				(int) (y - Game.instance.gameCamera.getyOffset()), width, height, null);
 		
 	}
@@ -39,5 +39,4 @@ public class Waves extends StaticEntity {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 }

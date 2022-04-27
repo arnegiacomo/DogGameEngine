@@ -7,6 +7,8 @@ import no.arnemunthekaas.gameproject.gfx.Assets;
 import no.arnemunthekaas.gameproject.tiles.Tile;
 
 public class Grass extends StaticEntity{
+	
+	public static int frequency = 7;
 
 	public Grass(float x, float y) {
 		super(x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);

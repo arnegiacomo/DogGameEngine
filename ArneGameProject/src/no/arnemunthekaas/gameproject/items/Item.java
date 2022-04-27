@@ -12,7 +12,7 @@ public class Item {
 	// Handler
 	
 	public static Item[] items = new Item[256]; //all items in game
-	public static Item logItem = new Item(Assets.log, "Log", 0); //texture, name, id
+	// public static Item logItem = new Item(Assets.log, "Log", 0); //texture, name, id
 	
 	// Class
 

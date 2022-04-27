@@ -19,7 +19,7 @@ public class Inventory {
 		
 		//TEMPORARY
 		
-		addItem(Item.logItem.createNew(10));
+		// addItem(Item.logItem.createNew(10));
 	}
 	
 	public void tick() {

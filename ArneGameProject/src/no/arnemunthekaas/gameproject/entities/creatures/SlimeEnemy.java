@@ -36,9 +36,9 @@ public class SlimeEnemy extends Creature{
 	@Override
 	public void render(Graphics g) {
 		
-		g.drawImage(Assets.slime, (int) (x - Game.instance.gameCamera.getxOffset()), 
-				(int) (y - Game.instance.gameCamera.getyOffset()), width, height, null);
-		
+//		g.drawImage(Assets.slime, (int) (x - Game.instance.gameCamera.getxOffset()), 
+//				(int) (y - Game.instance.gameCamera.getyOffset()), width, height, null);
+//		
 		//temp hitbox display
 //		g.drawRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()), 
 //		 		(int) (y + bounds.y - handler.getGameCamera().getyOffset()), 
