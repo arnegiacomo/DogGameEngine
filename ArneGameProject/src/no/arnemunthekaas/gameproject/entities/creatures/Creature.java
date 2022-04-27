@@ -2,6 +2,7 @@ package no.arnemunthekaas.gameproject.entities.creatures;
 
 import no.arnemunthekaas.gameproject.Game;
 import no.arnemunthekaas.gameproject.entities.Entity;
+import no.arnemunthekaas.gameproject.levels.Level;
 import no.arnemunthekaas.gameproject.tiles.Tile;
 
 public abstract class Creature extends Entity {
@@ -22,10 +23,22 @@ public abstract class Creature extends Entity {
 	}
 	
 	public void move() {
-		if(!checkEntityCollisions(xMove, 0f)) 
+		if(!checkEntityCollisions(xMove, 0f) && (x < Tile.TILEWIDTH * Level.instance.width) && (x > 0)) ;
 			moveX();
-		if(!checkEntityCollisions(0f, yMove)) 
+		if(!checkEntityCollisions(0f, yMove)  && (y < Tile.TILEHEIGHT * Level.instance.height) && (y >= 0)) 
 			moveY();	
+		
+		if(x > Tile.TILEWIDTH * Level.instance.width - Level.instance.width)
+			x = Tile.TILEWIDTH * Level.instance.width - Level.instance.width;
+		
+		if(y > Tile.TILEHEIGHT * Level.instance.height - Level.instance.width)
+			y = Tile.TILEHEIGHT * Level.instance.height - Level.instance.height;
+		
+		if(x < 0)
+			x = 0;
+		
+		if(y < 0)
+			y = 0;
 	}
 	
 	public void moveX() {

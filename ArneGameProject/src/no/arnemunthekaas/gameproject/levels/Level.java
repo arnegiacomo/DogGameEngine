@@ -16,7 +16,7 @@ public class Level {
 	
 	public static Level instance;
 
-	private int width = 50, height = 50;
+	public int width = 50, height = 50;
 	private int spawnX, spawnY;
 	private int[][] tiles = new int[height][width];
 
@@ -30,19 +30,6 @@ public class Level {
 		
 		entityManager = new EntityManager(new Player(100, 100));
 		itemManager = new ItemManager();
-
-		// Temp entities
-//		entityManager.addEntity(new Tree(handler, 100, 250));
-//		entityManager.addEntity(new Tree(handler, 250, 250));
-//		entityManager.addEntity(new Tree(handler, 250, 800));
-//		entityManager.addEntity(new TallGrass(handler, 550, 550));
-//		entityManager.addEntity(new TallGrass(handler, 600, 550));
-//		entityManager.addEntity(new TallGrass(handler, 650, 550));
-//		entityManager.addEntity(new TallGrass(handler, 550, 600));
-//		entityManager.addEntity(new TallGrass(handler, 600, 600));
-//		entityManager.addEntity(new TallGrass(handler, 650, 600));
-//		entityManager.addEntity(new SlimeEnemy(handler, 400, 800, Tile.TILEWIDTH, Tile.TILEHEIGHT));		
-
 		
 		// loadLevel(path);
 		generate();
