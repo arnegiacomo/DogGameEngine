@@ -5,3 +5,5 @@
 - Intention is to create a superlightweight game engine to run on most platforms
 - The game engine has a lot of unrealised potential, with sprites, terrain, animation, entity system, inventory system, ui system, basic pathfinding and directional attacks, audio playing, level generation, and level loading.
 - All code is undocumented, and kinda subpar. Dive in at own risk!
+
+![alt text](https://github.com/h593267/DogGameEngine/blob/master/Screenshot%202022-04-27%20at%2013.38.21.png?raw=true)
