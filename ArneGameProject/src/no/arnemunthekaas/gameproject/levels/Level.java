@@ -31,7 +31,6 @@ public class Level {
 		entityManager = new EntityManager(new Player(100, 100));
 		itemManager = new ItemManager();
 		
-		// loadLevel(path);
 		generate();
 
 		entityManager.getPlayer().setX(spawnX * Tile.TILEWIDTH);
@@ -95,22 +94,6 @@ public class Level {
 		}
 
 		return t;
-	}
-
-	private void loadLevel(String path) {
-		String file = Utils.loadFileAsString(path);
-		String[] tokens = file.split("\\s+");
-		width = Utils.parseInt(tokens[0]);
-		height = Utils.parseInt(tokens[1]);
-		spawnX = Utils.parseInt(tokens[2]);
-		spawnY = Utils.parseInt(tokens[3]);
-
-		tiles = new int[width][height];
-		for (int y = 0; y < height; y++) {
-			for (int x = 0; x < width; x++) {
-				tiles[x][y] = Utils.parseInt(tokens[(x + y * width) + 4]);
-			}
-		}
 	}
 
 	// GETTERS SETTERS
